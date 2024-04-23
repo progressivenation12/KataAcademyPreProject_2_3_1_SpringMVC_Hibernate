@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet"/>
+
+    <style>
+        body {
+            background-color: #FEFDED
+        }
+
+        a {
+            text-align: center;
+            color: #8CC0DE;
+        }
+
+        h1, p {
+            text-align: center;
+            color: #FA7070;
+            font-family: "Press Start 2P", serif
+        }
+
+        th {
+            padding-bottom: 10px;
+            width: max-content;
+            padding-left: 10vh;
+            color: #508D69;
+            font-family: "Press Start 2P", serif
+        }
+
+        td {
+            width: max-content;
+            color: #000000;
+            padding-left: 10vh;
+            font-family: "Press Start 2P", serif
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 100px;
+        }
+
+        .link {
+            width: fit-content;
+            margin-top: 1vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .polya {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .polya label {
+            margin-right: 10px;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <p>Create New User</p>
+    <form th:method="POST" th:action="@{/users}" th:object="${user}">
+        <div class="polya">
+            <label for="firstName">Enter your first name: </label>
+            <input type="text" th:field="*{firstName}" id="firstName"><br>
+            <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</div>
+        </div>
+        <div class="polya">
+            <label for="lastName">Enter your last name: </label>
+            <input type="text" th:field="*{lastName}" id="lastName"><br>
+            <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</div>
+        </div>
+        <div class="polya">
+            <label for="age">Enter your age: </label>
+            <input type="text" th:field="*{age}" id="age"><br>
+            <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age Error</div>
+        </div>
+        <div class="polya">
+            <label for="email">Enter your email: </label>
+            <input type="text" th:field="*{email}" id="email"><br>
+            <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</div>
+        </div>
+        <br/>
+        <div class="button">
+            <input type="submit" value="Create User"/>
+        </div>
+    </form>
+</div>
+<div class="link">
+    <a href="/users">Back to page: Users</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet"/>
+
+    <style>
+        body {
+            background-color: #FEFDED
+        }
+
+        a {
+            text-align: center;
+            color: #8CC0DE;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FA7070;
+            font-family: "Press Start 2P", serif
+        }
+
+        th {
+            padding-bottom: 10px;
+            width: max-content;
+            padding-left: 10vh;
+            color: #508D69;
+            font-family: "Press Start 2P", serif
+        }
+
+        td {
+            width: max-content;
+            color: #000000;
+            padding-left: 10vh;
+            font-family: "Press Start 2P", serif
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 100px;
+        }
+
+        .link {
+            width: fit-content;
+            margin-top: 1vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Users</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}">Id</td>
+<!--            <td>-->
+<!--                <a th:href="@{/users/{id}(id=${user.getId()})}"-->
+<!--                   th:text="${user.getFirstName()}">First Name></a>-->
+<!--            </td>-->
+            <td th:text="${user.getFirstName()}">First Name</td>
+            <td th:text="${user.getLastName()}">Last Name</td>
+            <td th:text="${user.getAge()}">Age</td>
+            <td th:text="${user.getEmail()}">Email</td>
+            <td>
+                <a th:href="@{/users/{id}/edit(id=${user.getId()})}" th:text="Edit">Edit</a>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
+<hr/>
+<br/>
+<div class="link">
+    <a href="/users/newUser">Go to page: Create newUser</a>
+</div>
+<div class="link">
+    <a href="/welcome">Back to page: Welcome</a>
+</div>
+</body>
+</html>

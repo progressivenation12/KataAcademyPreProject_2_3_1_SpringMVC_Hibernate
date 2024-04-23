@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet"/>
+
+    <style>
+        body {
+            background-color: #FEFDED
+        }
+
+        a {
+            text-align: center;
+            color: #8CC0DE;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FA7070;
+            font-family: "Press Start 2P", serif
+        }
+
+        th {
+            width: 10vh;
+            color: #508D69;
+            font-family: "Press Start 2P", serif
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 100px;
+        }
+
+        .link {
+            width: fit-content;
+            margin-top: 1vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <p th:text="'ID-' + ${user.getId() + ' '
+    + user.getFirstName() + ' '
+    + user.getLastName() + ', '
+    + user.getAge() + ' years, '
+    + user.getEmail()}">User</p>
+</div>
+<div class="link">
+    <a href="/users">Back to page: Users</a>
+</div>
+
+</body>
+</html>

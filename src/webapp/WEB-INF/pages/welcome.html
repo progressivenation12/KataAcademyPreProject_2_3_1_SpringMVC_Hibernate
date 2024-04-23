@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #153448
+        }
+
+        a {
+            text-align: center;
+            color: #8CC0DE;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3vh;
+            color: #FA7070;
+            font-family: "Press Start 2P",serif
+        }
+
+        th {
+            width: 25vh;
+            color: #508D69;
+            font-family: "Press Start 2P",serif
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 100px;
+        }
+
+        .link {
+            width: fit-content;
+            margin-top: 1vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <th:block th:each="msg : ${messages}">
+        <h1 th:text="${msg}"></h1>
+    </th:block>
+</div>
+
+<div class="link">
+    <a href="/users">Press START</a>
+</div>
+
+</body>
+
+</html>
