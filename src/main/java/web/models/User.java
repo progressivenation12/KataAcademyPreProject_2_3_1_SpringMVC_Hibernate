@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,7 +30,8 @@ public class User {
     private String lastName;
 
     @NotNull(message = "Field not be empty!")
-    @Min(value = 0, message = "Age should be greater than 0!")
+    @Min(value = 0, message = "The age must not be less than 0!")
+    @Max(value = 150, message = "The age should not be more than 150!")
     @Column(name = "age")
     private int age;
     @NotEmpty(message = "Field not be empty!")

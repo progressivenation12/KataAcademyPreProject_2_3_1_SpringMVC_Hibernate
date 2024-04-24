@@ -1,47 +1,32 @@
 package web.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import web.models.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class UsersDAOImpl implements UserDAO {
-    private final SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Autowired
-    public UsersDAOImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    @Transactional(readOnly = true)
     public List<User> getUsersList() {
-        Session session = sessionFactory.getCurrentSession();
-
-        return session.createQuery("SELECT user FROM User user", User.class)
+        return entityManager.createQuery("SELECT user FROM User user", User.class)
                 .getResultList();
     }
 
-    @Transactional(readOnly = true)
     public User getUserByID(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(User.class, id);
+        return entityManager.find(User.class, id);
     }
 
-    @Transactional
     public void saveUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(user);
+        entityManager.merge(user);
     }
 
-    @Transactional
     public void updateUser(int id, User updateUser) {
-        Session session = sessionFactory.getCurrentSession();
-        User toUpdateUser = session.get(User.class, id);
+        User toUpdateUser = entityManager.find(User.class, id);
 
         toUpdateUser.setFirstName(updateUser.getFirstName());
         toUpdateUser.setLastName(updateUser.getLastName());
@@ -49,9 +34,7 @@ public class UsersDAOImpl implements UserDAO {
         toUpdateUser.setEmail(updateUser.getEmail());
     }
 
-    @Transactional
     public void deleteUser(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        session.remove(session.get(User.class, id));
+        entityManager.remove(entityManager.find(User.class, id));
     }
 }

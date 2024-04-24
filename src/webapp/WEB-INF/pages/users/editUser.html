@@ -80,7 +80,7 @@
 <body>
 <div class="container">
     <p>Edit User</p>
-    <form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+    <form th:method="POST" th:action="@{/users/user(id=${user.getId()})}" th:object="${user}">
         <div class="polya">
             <label for="firstName">Edit your first name: </label>
             <input type="text" th:field="*{firstName}" id="firstName">

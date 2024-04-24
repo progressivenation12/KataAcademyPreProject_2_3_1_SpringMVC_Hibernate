@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.service.UserService;
 import web.models.User;
 
@@ -34,8 +35,8 @@ public class UserController {
         return "users/users";
     }
 
-    @GetMapping("/{id}")
-    public String showUser(@PathVariable("id") int id, Model model) {
+    @GetMapping("/user")
+    public String showUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserByID(id));
         return "users/showUser";
     }
@@ -54,15 +55,15 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editUser(@PathVariable("id") int id, Model model) {
+    @GetMapping("/edit")
+    public String editUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserByID(id));
         return "users/editUser";
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/user")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                             @PathVariable("id") int id) {
+                             @RequestParam("id") int id) {
         if (bindingResult.hasErrors()) {
             return "users/editUser";
         }
@@ -70,9 +71,10 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("id") int id) {
         userService.deleteUser(id);
         return "redirect:/users";
     }
+
 }
