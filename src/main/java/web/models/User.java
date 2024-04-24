@@ -31,7 +31,7 @@ public class User {
 
     @NotNull(message = "Field not be empty!")
     @Min(value = 0, message = "The age must not be less than 0!")
-    @Max(value = 150, message = "The age should not be more than 150!")
+    @Max(value = 150, message = "The age should not be more than 155!")
     @Column(name = "age")
     private int age;
     @NotEmpty(message = "Field not be empty!")
