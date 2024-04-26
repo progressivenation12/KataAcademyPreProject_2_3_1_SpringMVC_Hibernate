@@ -7,6 +7,7 @@ import web.dao.UserDAO;
 import web.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,6 +22,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersList() {
         return userDAO.getUsersList();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userDAO.getUserByEmail(email);
     }
 
     @Transactional(readOnly = true)
